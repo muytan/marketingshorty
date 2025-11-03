@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Free Social Media Audit — Marketing Shorty</title>
+  <meta name="description" content="Free Social Media Audit for TikTok, Instagram, X, LinkedIn. One PDF with what is wrong, why it happens, and a 7 day plan. Delivered in 48 hours." />
+  <style>
+    :root{
+      --bg:#0a0a0a;
+      --ink:#ffffff;
+      --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.12);
+      --orange:#ff3b10; /* primary */
+      --orange2:#ff562e;
+      --purple:#6c3df0; /* accent only */
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      background:var(--bg); color:var(--ink); line-height:1.55; overflow-x:hidden;
+    }
+
+    /* background animation */
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    }
+    .orb,.orb2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(1px)}
+    .orb{
+      width:560px;height:560px;top:-210px;right:-210px;
+      background:radial-gradient(circle,rgba(255,59,16,.18),transparent 70%);
+      animation:float 16s ease-in-out infinite
+    }
+    .orb2{
+      width:420px;height:420px;left:-150px;bottom:-130px;
+      background:radial-gradient(circle,rgba(108,61,240,.10),transparent 70%);
+      animation:float2 18s ease-in-out infinite
+    }
+    @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,70px)}}
+    @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-60px)}}
+
+    .wrap{max-width:900px;margin:0 auto;padding:28px 20px 96px;position:relative;z-index:1}
+    header{display:flex;gap:12px;align-items:center;margin:8px 0 16px}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .badge{
+      display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;
+      background:rgba(255,59,16,.15);border:1px solid rgba(255,59,16,.35);padding:6px 10px;border-radius:6px
+    }
+
+    h1{font-size:3rem;letter-spacing:-.02em;margin:10px 0 8px}
+    p.lead{color:var(--muted);font-size:1.12rem}
+
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;font-weight:800;
+      text-decoration:none;border:1px solid transparent;cursor:pointer;transition:.18s
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      color:#0b0b0b;box-shadow:0 12px 36px rgba(255,59,16,.35)
+    }
+    .btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 46px rgba(255,59,16,.45)}
+
+    .panel{
+      border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:16px;
+      padding:22px;margin-top:22px;transition:transform .2s ease, box-shadow .2s ease
+    }
+    .panel:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
+
+    /* visual */
+    .visual p{color:var(--muted);margin-bottom:8px}
+    .visual a img{
+      width:100%; max-width:1120px; height:auto; aspect-ratio:1120/928;
+      display:block; border-radius:12px; border:1px solid var(--line); background:#0d0d0d;
+      margin:0 auto;
+    }
+
+    /* form */
+    .audit{padding-top:20px}
+    .form{
+      display:grid;gap:14px;background:rgba(255,255,255,.02);border:1px solid var(--line);
+      border-radius:16px;padding:22px
+    }
+    label{font-size:.9rem;color:rgba(255,255,255,.75)}
+    input,textarea,select{
+      width:100%;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.5);
+      border:1px solid var(--line);color:#fff;font-size:1rem;transition:.15s
+    }
+    input:focus,textarea:focus,select:focus{
+      outline:none;border-color:rgba(108,61,240,.45);box-shadow:0 0 0 3px rgba(108,61,240,.15)
+    }
+    textarea{min-height:96px;resize:vertical}
+
+    /* platform selector as toggle buttons */
+    .platforms{display:flex;flex-wrap:wrap;gap:10px}
+    .pbtn{
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+      color:#fff; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:700;
+      transition:transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .pbtn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.2)}
+    .pbtn[aria-pressed="true"]{
+      background:rgba(255,59,16,.12); border-color:rgba(255,59,16,.45);
+      box-shadow:0 0 0 2px rgba(255,59,16,.18) inset;
+    }
+
+    .submit-row{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* what others say at bottom */
+    .quotes{padding:40px 0 8px}
+    .quotes .title{font-size:2rem;margin-bottom:10px}
+    .quote-list{
+      display:grid;gap:12px;
+    }
+    .quote{
+      background:rgba(255,255,255,.02); border:1px solid var(--line);
+      border-radius:14px; padding:18px; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .quote:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,59,16,.5);
+      box-shadow:0 10px 28px rgba(255,59,16,.2), 0 0 0 2px rgba(108,61,240,.18) inset;
+    }
+    .quote p{color:rgba(255,255,255,.92)}
+    .quote .by{margin-top:8px; color:rgba(255,255,255,.70); font-size:.95rem}
+    .quote .role{color:rgba(255,255,255,.55); font-size:.92rem; margin-top:2px}
+
+    footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:rgba(255,255,255,.66);font-size:.95rem}
+    a.link{color:#fff;opacity:.88;text-decoration:none}
+    a.link:hover{opacity:1}
+
+    .toast{
+      position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+      background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border:1px solid var(--line);color:#fff;
+      padding:12px 16px;border-radius:10px;box-shadow:0 16px 34px rgba(0,0,0,.45);
+      opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:680px){h1{font-size:2.2rem}}
+  </style>
+</head>
+<body>
+  <div class="orb"></div><div class="orb2"></div>
+
+  <main class="wrap">
+    <header>
+      <div class="brand">Marketing Shorty</div>
+      <span class="badge">Free Social Media Audit</span>
+    </header>
+
+    <!-- HERO -->
+    <h1>Find the blockers. Grow faster.</h1>
+    <p class="lead">TikTok, Instagram, X, LinkedIn. One free PDF in 48 hours. What is wrong, why it happens, and what to post next week.</p>
+
+    <div class="cta-row">
+      <a href="#" class="btn primary cta" data-intent="hero-start">Start my free audit</a>
+    </div>
+
+    <!-- VISUAL -->
+    <section class="panel visual" style="margin-top:16px;">
+      <p class="muted">Performance right after applying the audit</p>
+      <!-- required image, 1120x928 -->
+      <a href="https://ibb.co/whcwv0S0">
+        <img src="https://i.ibb.co/b5b2fWsW/before-afteraudit.png" alt="before-afteraudit" width="1120" height="928" />
+      </a>
+    </section>
+
+    <!-- REQUEST FORM directly under visual -->
+    <section class="audit" id="audit">
+      <h2>Request your free audit</h2>
+      <p class="muted">For small brands and personal brands. For social media managers, marketers, and founders.</p>
+
+      <form id="audit-form" action="https://formspree.io/f/mldoynjb" method="POST" class="form">
+        <!-- Email -->
+        <div>
+          <label>Your email</label>
+          <input id="email" name="email" type="email" placeholder="you@email.com" required />
+        </div>
+
+        <!-- Platforms as toggle buttons -->
+        <div>
+          <label>Platform or platforms</label>
+          <div class="platforms" id="platformBtns" role="group" aria-label="Platform selection">
+            <button type="button" class="pbtn" data-value="TikTok" aria-pressed="false">TikTok</button>
+            <button type="button" class="pbtn" data-value="Instagram" aria-pressed="false">Instagram</button>
+            <button type="button" class="pbtn" data-value="X" aria-pressed="false">X</button>
+            <button type="button" class="pbtn" data-value="LinkedIn" aria-pressed="false">LinkedIn</button>
+          </div>
+          <input type="hidden" id="platforms" name="platforms" />
+        </div>
+
+        <!-- URL -->
+        <div>
+          <label>Account URL</label>
+          <input id="url" name="account_url" type="url" placeholder="https://tiktok.com/@yourbrand" />
+        </div>
+
+        <!-- Goal -->
+        <div>
+          <label>Main goal</label>
+          <select id="goal" name="goal">
+            <option value="More followers" selected>More followers</option>
+            <option value="App installs or signups">App installs or signups</option>
+            <option value="Website leads">Website leads</option>
+            <option value="E-commerce sales">E-commerce sales</option>
+          </select>
+        </div>
+
+        <!-- Notes -->
+        <div>
+          <label>Notes</label>
+          <textarea id="notes" name="notes" placeholder="Niche, audience, constraints. Keep it short."></textarea>
+        </div>
+
+        <!-- Meta -->
+        <input type="hidden" name="source" value="Marketing Shorty Landing" />
+        <input type="hidden" name="timestamp" id="ts" />
+        <input type="text" name="_gotcha" style="display:none" />
+
+        <div class="submit-row">
+          <button type="submit" class="btn primary cta" data-intent="form-send">Send audit request</button>
+        </div>
+
+        <p id="ok-msg" style="display:none;color:#9ef7c1;font-size:.95rem;margin-top:8px">
+          Thanks. Details sent. You will receive your PDF within 48 hours.
+        </p>
+        <p class="muted" style="font-size:.9rem">The audit is free forever. One PDF only.</p>
+      </form>
+    </section>
+
+    <!-- WHAT OTHERS SAY at bottom -->
+    <section class="quotes" id="testimonials">
+      <h2 class="title">What others say</h2>
+      <div class="quote-list">
+        <div class="quote">
+          <p>We could not see these issues for a year. This analysis showed them on a single page with exact fixes.</p>
+          <div class="by">AI App</div>
+          <div class="role">Product Manager</div>
+        </div>
+        <div class="quote">
+          <p>Some videos were viral but did not convert to installs. We fixed CTAs and formats. In 10 days we saw 600 comments and 1,900 new installs.</p>
+          <div class="by">Mobile App</div>
+          <div class="role">Growth PM</div>
+        </div>
+        <div class="quote">
+          <p>We used influencer marketing and burned budget. We switched to creator marketing. Engagement went up 4x and we finally had repeatable content.</p>
+          <div class="by">SaaS Brand</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="quote">
+          <p>We did not believe daily posting mattered. After we aligned hooks and formats we hit 10,000 TikTok followers in two months.</p>
+          <div class="by">E-commerce</div>
+          <div class="role">Social Lead</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Contact: <a class="link" href="mailto:marketingshorty@gmail.com">marketingshorty@gmail.com</a>
+      &nbsp;|&nbsp; X: <a class="link" href="https://x.com/MarketingShorty" target="_blank">@MarketingShorty</a>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script>
+    // platform toggle buttons
+    const btnWrap = document.getElementById('platformBtns');
+    const hiddenPlatforms = document.getElementById('platforms');
+    btnWrap.querySelectorAll('.pbtn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const pressed = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', String(!pressed));
+        const selected = [...btnWrap.querySelectorAll('.pbtn[aria-pressed="true"]')].map(b=>b.dataset.value);
+        hiddenPlatforms.value = selected.join(', ');
+      });
+    });
+
+    // toast helper
+    function toast(msg){
+      const t=document.getElementById('toast');
+      t.textContent=msg||'Saved';
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2200);
+    }
+
+    // submit form via AJAX to Formspree
+    const form = document.getElementById('audit-form');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+
+      // timestamp
+      document.getElementById('ts').value = new Date().toISOString();
+
+      const data = new FormData(form);
+      try {
+        const resp = await fetch(form.action, {
+          method:'POST', body:data, headers:{'Accept':'application/json'}
+        });
+        if (resp.ok) {
+          document.getElementById('ok-msg').style.display='block';
+          toast('Details sent');
+          form.reset();
+          // reset platform buttons state
+          btnWrap.querySelectorAll('.pbtn').forEach(b=>b.setAttribute('aria-pressed','false'));
+          hiddenPlatforms.value='';
+        } else {
+          toast('Could not send. Email marketingshorty@gmail.com');
+        }
+      } catch(err){
+        toast('Connection error. Email marketingshorty@gmail.com');
+      }
+    });
+
+    // top CTA also submits to Formspree with current values
+    document.querySelectorAll('.cta').forEach(cta=>{
+      cta.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        const email = document.getElementById('email')?.value.trim();
+        if(!email){
+          document.getElementById('audit').scrollIntoView({behavior:'smooth',block:'start'});
+          toast('Add your email then submit');
+          return;
+        }
+        // build payload from current fields
+        const payload = new FormData();
+        payload.set('email', email);
+        payload.set('platforms', hiddenPlatforms.value || '');
+        payload.set('account_url', document.getElementById('url')?.value || '');
+        payload.set('goal', document.getElementById('goal')?.value || '');
+        payload.set('notes', document.getElementById('notes')?.value || '');
+        payload.set('source','Marketing Shorty Landing CTA');
+        payload.set('timestamp', new Date().toISOString());
+
+        try{
+          const resp = await fetch('https://formspree.io/f/mldoynjb', { method:'POST', body:payload, headers:{'Accept':'application/json'} });
+          if(resp.ok){
+            toast('Details sent');
+            document.getElementById('ok-msg').style.display='block';
+          }else{
+            toast('Use the form below to submit');
+            document.getElementById('audit').scrollIntoView({behavior:'smooth',block:'start'});
+          }
+        }catch(err){
+          toast('Use the form below to submit');
+          document.getElementById('audit').scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
